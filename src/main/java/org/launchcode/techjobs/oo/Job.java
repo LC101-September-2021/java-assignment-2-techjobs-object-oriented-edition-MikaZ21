@@ -39,20 +39,20 @@ public class Job {
         String message = "\n";
         int index = 0;
 
-        for (Field f : fields) {
-            if (f.getName() == "nextId") {
+        for (Field field : fields) {
+            if (field.getName() == "nextId") {
             } else {
                 try {
-                    if(f.get(this) instanceof JobField) {
-                        if (((JobField) f.get(this)).getValue() == "") {
+                    if(field.get(this) instanceof JobField) {
+                        if (((JobField) field.get(this)).getValue() == "") {
                             message = message + labels[index] + unavailable + "\n";
                         } else {
-                            message = message + labels[index] + f.get(this) + "\n";
+                            message = message + labels[index] + field.get(this) + "\n";
                         }
-                    } else if (f.get(this) == null || f.get(this) == "") {
+                    } else if (field.get(this) == null || field.get(this) == "") {
                         message = message + labels[index] + unavailable + "\n";
                     } else {
-                        message = message + labels[index] + f.get(this) + "\n";
+                        message = message + labels[index] + field.get(this) + "\n";
                     }
                     index++;
                 } catch (Exception e) {
@@ -66,10 +66,10 @@ public class Job {
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Job)) return false;
-        Job job = (Job) o;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Job)) return false;
+        Job job = (Job) object;
         return getId() == job.getId();
     }
 
